@@ -19,38 +19,32 @@ mixin _$SignInEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() signIn,
-    required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signIn,
-    TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signIn,
-    TResult Function()? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SignIn value) signIn,
-    required TResult Function(Logout value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignIn value)? signIn,
-    TResult? Function(Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignIn value)? signIn,
-    TResult Function(Logout value)? logout,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +107,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() signIn,
-    required TResult Function() logout,
   }) {
     return signIn();
   }
@@ -122,7 +115,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signIn,
-    TResult? Function()? logout,
   }) {
     return signIn?.call();
   }
@@ -131,7 +123,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signIn,
-    TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -144,7 +135,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SignIn value) signIn,
-    required TResult Function(Logout value) logout,
   }) {
     return signIn(this);
   }
@@ -153,7 +143,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignIn value)? signIn,
-    TResult? Function(Logout value)? logout,
   }) {
     return signIn?.call(this);
   }
@@ -162,7 +151,6 @@ class _$SignInImpl implements SignIn {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignIn value)? signIn,
-    TResult Function(Logout value)? logout,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -174,108 +162,6 @@ class _$SignInImpl implements SignIn {
 
 abstract class SignIn implements SignInEvent {
   const factory SignIn() = _$SignInImpl;
-}
-
-/// @nodoc
-abstract class _$$LogoutImplCopyWith<$Res> {
-  factory _$$LogoutImplCopyWith(
-          _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
-      __$$LogoutImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LogoutImplCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$LogoutImpl>
-    implements _$$LogoutImplCopyWith<$Res> {
-  __$$LogoutImplCopyWithImpl(
-      _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LogoutImpl implements Logout {
-  const _$LogoutImpl();
-
-  @override
-  String toString() {
-    return 'SignInEvent.logout()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogoutImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() signIn,
-    required TResult Function() logout,
-  }) {
-    return logout();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? signIn,
-    TResult? Function()? logout,
-  }) {
-    return logout?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? signIn,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) {
-    if (logout != null) {
-      return logout();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignIn value) signIn,
-    required TResult Function(Logout value) logout,
-  }) {
-    return logout(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignIn value)? signIn,
-    TResult? Function(Logout value)? logout,
-  }) {
-    return logout?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignIn value)? signIn,
-    TResult Function(Logout value)? logout,
-    required TResult orElse(),
-  }) {
-    if (logout != null) {
-      return logout(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Logout implements SignInEvent {
-  const factory Logout() = _$LogoutImpl;
 }
 
 /// @nodoc

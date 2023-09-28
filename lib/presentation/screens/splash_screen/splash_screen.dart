@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/application/routes/routes.dart';
 import 'package:todo/business_logic/splash_screen/splash_screen_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,6 +19,6 @@ class SplashScreen extends StatelessWidget {
         );
       });
  
-    return Scaffold();
+    return const Scaffold();
   }
 }

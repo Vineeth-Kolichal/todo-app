@@ -24,4 +24,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(isLoading: false, message: result));
     });
   }
+  Future<void> logout() async {
+    await repository.logout();
+  }
 }

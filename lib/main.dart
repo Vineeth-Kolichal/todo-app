@@ -6,7 +6,6 @@ import 'package:todo/business_logic/sign_up_screen/sign_up_screen_bloc.dart';
 import 'package:todo/business_logic/splash_screen/splash_screen_cubit.dart';
 import 'package:todo/utils/colors/colors.dart';
 import 'package:todo/utils/service_locatior/di/configure_injection.dart';
-import 'presentation/screens/export_screens.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
@@ -31,11 +30,12 @@ class TodoApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<SignInBloc>(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => getIt<SplashScreenCubit>(),
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: customprimarycolor,
