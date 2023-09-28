@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
+import 'package:todo/business_logic/todo/todo_bloc.dart';
 
 import '../../../../data/models/all_todo_model/todo.dart';
 import '../../../widgets/export_common_widgets.dart';
@@ -13,73 +16,84 @@ class TodoLitsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final DateTime createdDate = todo.createdAt!;
+    final String createdDateFormatted =
+        DateFormat.yMMMMd('en_US').add_jm().format(createdDate);
+    final DateTime updatedDate = todo.updatedAt!;
+    final String updatedDateFormatted =
+        DateFormat.yMMMMd('en_US').add_jm().format(updatedDate);
     return Container(
       width: size.width,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    todo.title ?? '',
-                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
-                  ),
-                  Space.y(10),
-                  const Row(
-                    children: [
-                      Icon(
-                        Iconsax.calendar_1,
-                        size: 13,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        'Created On :',
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
-                      ),
-                    ],
-                  ),
-                  Theme(
-                    data: ThemeData(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      expandedAlignment: Alignment.topLeft,
-                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                      tilePadding: EdgeInsets.zero,
-                      title: const Text(
-                        'Description',
-                        style: TextStyle(fontSize: 13),
-                      ),
-                      children: [
-                        Text(todo.description ?? ''),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
             Row(
               children: [
+                Text(
+                  todo.title ?? '',
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w700),
+                ),
+                const Spacer(),
                 Visibility(
                   visible: !(todo.isCompleted ?? false),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context
+                            .read<TodoBloc>()
+                            .add(UpdateTodoStatus(todo.id!));
+                      },
                       icon: const Icon(
                         Iconsax.tick_circle,
                         color: Color.fromARGB(255, 189, 188, 188),
                       )),
                 ),
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Iconsax.trash,
-                      color: Colors.red,
-                    )),
+                  onPressed: () {
+                    context.read<TodoBloc>().add(DeleteTodo(todo.id!));
+                  },
+                  icon: const Icon(
+                    Iconsax.trash,
+                    color: Colors.red,
+                  ),
+                ),
               ],
+            ),
+            Space.y(10),
+            Row(
+              children: [
+                Icon(
+                  Iconsax.calendar_1,
+                  size: 13,
+                  color: Colors.grey,
+                ),
+                Text(
+                  'Created On : ',
+                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                ),
+                Text(todo.isCompleted!
+                    ? createdDateFormatted
+                    : updatedDateFormatted)
+              ],
+            ),
+            Theme(
+              data: ThemeData(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                expandedAlignment: Alignment.topLeft,
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                tilePadding: EdgeInsets.zero,
+                title: const Text(
+                  'Description',
+                  style: TextStyle(fontSize: 13),
+                ),
+                children: [
+                  Text(todo.description ?? ''),
+                ],
+              ),
             )
           ],
         ),

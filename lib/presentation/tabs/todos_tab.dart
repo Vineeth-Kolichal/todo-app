@@ -22,7 +22,9 @@ class TodoTab extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: ListView.separated(
           itemBuilder: (context, index) {
-            return TodoLitsTile(todo: todoList[index],);
+            return TodoLitsTile(
+              todo: todoList[index],
+            );
           },
           separatorBuilder: (context, index) => Space.y(10),
           itemCount: todoList.length),

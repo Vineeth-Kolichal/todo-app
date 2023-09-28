@@ -7,18 +7,17 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
-     
-        String nextRoute =
-            await context.read<SplashScreenCubit>().nextScreenRoute();
-        Future.delayed(
-        const   Duration(milliseconds: 3000),
-          () {
-            Navigator.of(context).pushReplacementNamed(nextRoute);
-          },
-        );
-      });
- 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      String nextRoute =
+          await context.read<SplashScreenCubit>().nextScreenRoute();
+      Future.delayed(
+        const Duration(milliseconds: 3000),
+        () {
+          Navigator.of(context).pushReplacementNamed(nextRoute);
+        },
+      );
+    });
+
     return const Scaffold();
   }
 }

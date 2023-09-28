@@ -27,4 +27,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<void> logout() async {
     await repository.logout();
   }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
 }

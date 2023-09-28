@@ -9,9 +9,9 @@ class AllTodoModel {
   String? message;
   String? user;
   int? count;
- final List<Todo> todos;
+  final List<Todo> todos;
 
-  AllTodoModel({this.message, this.user, this.count, this.todos=const []});
+  AllTodoModel({this.message, this.user, this.count, this.todos = const []});
 
   factory AllTodoModel.fromJson(Map<String, dynamic> json) {
     return _$AllTodoModelFromJson(json);

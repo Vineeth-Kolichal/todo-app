@@ -13,15 +13,15 @@ import 'package:dio/dio.dart' as _i3;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:todo/business_logic/bloc/todo_bloc.dart' as _i12;
 import 'package:todo/business_logic/sign_in_screen/sign_in_bloc.dart' as _i10;
 import 'package:todo/business_logic/sign_up_screen/sign_up_screen_bloc.dart'
     as _i11;
 import 'package:todo/business_logic/splash_screen/splash_screen_cubit.dart'
     as _i5;
+import 'package:todo/business_logic/todo/todo_bloc.dart' as _i12;
 import 'package:todo/data/data_providers/auth_provider/auth_provider.dart'
     as _i9;
-import 'package:todo/data/data_providers/todo_data_provider/todo_dataProvider.dart'
+import 'package:todo/data/data_providers/todo_data_provider/todo_data_provider.dart'
     as _i7;
 import 'package:todo/data/repositories/auth_repositories.dart' as _i8;
 import 'package:todo/data/repositories/todo_repository.dart' as _i6;

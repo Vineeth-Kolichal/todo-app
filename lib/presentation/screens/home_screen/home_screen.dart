@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:todo/application/routes/routes.dart';
-import 'package:todo/business_logic/bloc/todo_bloc.dart';
 import 'package:todo/presentation/widgets/export_common_widgets.dart';
+import 'package:todo/presentation/widgets/message_snackbar.dart';
 import 'package:todo/utils/colors/colors.dart';
 
+import '../../../business_logic/todo/todo_bloc.dart';
 import '../../tabs/export_tabs.dart';
+import 'screen_utils/add_todo_bottomsheet.dart';
 import 'screen_utils/logout_dialoge.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -46,7 +48,39 @@ class HomeScreen extends StatelessWidget {
             )
           ]),
         ),
-        body: BlocBuilder<TodoBloc, TodoState>(
+        body: BlocConsumer<TodoBloc, TodoState>(
+          listener: (context, state) {
+            if (state.addStatus != null) {
+              if (state.addStatus == 'Todo successfully added') {
+                messageSnackbar(
+                    context: context,
+                    message: state.addStatus!,
+                    isError: false);
+              } else {
+                messageSnackbar(context: context, message: state.addStatus!);
+              }
+            }
+            if (state.updataStatus != null) {
+              if (state.updataStatus == 'Todo status updated') {
+                messageSnackbar(
+                    context: context,
+                    message: state.updataStatus!,
+                    isError: false);
+              } else {
+                messageSnackbar(context: context, message: state.updataStatus!);
+              }
+            }
+            if (state.deleteStatus != null) {
+              if (state.deleteStatus == 'Todo deleted') {
+                messageSnackbar(
+                    context: context,
+                    message: state.deleteStatus!,
+                    isError: false);
+              } else {
+                messageSnackbar(context: context, message: state.deleteStatus!);
+              }
+            }
+          },
           builder: (context, state) {
             if (state.isLoading) {
               return Center(
@@ -89,10 +123,7 @@ class HomeScreen extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             backgroundColor: customprimarycolor,
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => Container(),
-              );
+              addTodoBottomSheet(context);
             },
             label: const Text(
               'Add Todo',
