@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:todo/data/models/sign_in_req_model/sign_in_req_model.dart';
 import 'package:todo/data/models/sign_up_data_model/sign_up_data_model.dart';
 import 'package:todo/data/models/sign_up_resp_model/sign_up_resp_model.dart';
 import 'package:todo/data/repositories/auth_repositories.dart';
@@ -17,15 +19,38 @@ class AuthProvider implements AuthRepository {
   AuthProvider(this.dio, this.secureStorage);
 
   @override
-  Future<bool> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<void> logout() async {
+    try {
+      final token = await secureStorage.read(key: 'token');
+      await secureStorage.delete(key: 'token');
+      dio.options.headers["Authorization"] = 'Bearer $token';
+      dio.get(ApiEndpoints.logoutUrl);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override
-  Future<bool> signIn() {
-    // TODO: implement signIn
-    throw UnimplementedError();
+  Future<String> signIn(SignInReqModel signInReqModel) async {
+    try {
+      final response =
+          await dio.post(ApiEndpoints.signInUrl, data: signInReqModel.toJson());
+      if (response.statusCode == 200) {
+        final token = response.data['token'];
+        await secureStorage.write(key: 'token', value: token);
+        return response.data['message'];
+      } else {
+        return 'Something error';
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return e.response?.data['message'];
+      } else {
+        return "Something error";
+      }
+    } catch (e) {
+      return "Something error";
+    }
   }
 
   @override

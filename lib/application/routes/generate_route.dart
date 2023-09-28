@@ -11,6 +11,8 @@ class AppRouteGenerate {
         return MaterialPageRoute(builder: (ctx) => const LoginScreen());
       case ScreenRoutes.signUp:
         return MaterialPageRoute(builder: (ctx) => const SignUpScreen());
+          case ScreenRoutes.home:
+        return MaterialPageRoute(builder: (ctx) => const HomeScreen());
 
       default:
         return _errorRoute();

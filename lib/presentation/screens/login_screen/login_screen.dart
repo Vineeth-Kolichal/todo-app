@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todo/application/routes/routes.dart';
+import 'package:todo/business_logic/sign_in_screen/sign_in_bloc.dart';
 
 import '../../../utils/colors/colors.dart';
 import '../../widgets/export_common_widgets.dart';
@@ -11,6 +16,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signin = context.read<SignInBloc>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
@@ -37,54 +43,81 @@ class LoginScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          LottieBuilder.asset('assets/lottie/login.json',
-                              height: size.width * 0.5),
-                          Material(
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w800),
-                            ),
-                          ),
-                          Space.y(10),
-                          CustomTextFormField(
-                            hintText: 'e-mail',
-                            controller: TextEditingController(),
-                            prefixIcon: Iconsax.sms,
-                          ),
-                          CustomTextFormField(
-                            hintText: 'Password',
-                            controller: TextEditingController(),
-                            prefixIcon: Iconsax.lock,
-                          ),
-                          CustomElevatedButton(
-                            buttonLabel: "Sign In",
-                            onPressed: () {},
-                          ),
-                          Space.y(10),
-                          const Material(
-                              child: Text("Don't you have an account?")),
-                          Material(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed(ScreenRoutes.signUp);
-                              },
-                              child: const Text(
-                                'SignUp',
+                      child: Form(
+                        key: signin.formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            LottieBuilder.asset('assets/lottie/login.json',
+                                height: size.width * 0.5),
+                            Material(
+                              child: Text(
+                                'Sign In',
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: customprimarycolor),
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
-                          )
-                        ],
+                            Space.y(10),
+                            CustomTextFormField(
+                              hintText: 'e-mail',
+                              controller: signin.emailController,
+                              prefixIcon: Iconsax.sms,
+                            ),
+                            CustomTextFormField(
+                              hintText: 'Password',
+                              controller: signin.passwordController,
+                              prefixIcon: Iconsax.lock,
+                            ),
+                            BlocConsumer<SignInBloc, SignInState>(
+                              listener: (context, state) {
+                                if (state.message != null) {
+                                  log(state.message!);
+                                }
+                                // TODO: implement listener
+                              },
+                              builder: (context, state) {
+                                if (state.isLoading) {
+                                  return Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: LoadingAnimationWidget.inkDrop(
+                                          color: customprimarycolor, size: 25),
+                                    ),
+                                  );
+                                }
+                                return CustomElevatedButton(
+                                  buttonLabel: "Sign In",
+                                  onPressed: () {
+                                    if (signin.formKey.currentState!
+                                        .validate()) {
+                                      signin.add(const SignIn());
+                                    }
+                                  },
+                                );
+                              },
+                            ),
+                            Space.y(10),
+                            const Material(
+                                child: Text("Don't you have an account?")),
+                            Material(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      ScreenRoutes.signUp);
+                                },
+                                child: const Text(
+                                  'SignUp',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900,
+                                      color: customprimarycolor),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

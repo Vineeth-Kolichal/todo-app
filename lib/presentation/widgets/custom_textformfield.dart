@@ -23,7 +23,7 @@ class CustomTextFormField extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return 'Please fill $hintText';
               } else {
-                return '';
+                return null;
               }
             },
             controller: controller,
