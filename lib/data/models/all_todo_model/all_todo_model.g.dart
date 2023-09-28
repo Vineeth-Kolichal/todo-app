@@ -11,8 +11,9 @@ AllTodoModel _$AllTodoModelFromJson(Map<String, dynamic> json) => AllTodoModel(
       user: json['user'] as String?,
       count: json['count'] as int?,
       todos: (json['todos'] as List<dynamic>?)
-          ?.map((e) => Todo.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Todo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$AllTodoModelToJson(AllTodoModel instance) =>

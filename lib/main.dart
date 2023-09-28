@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/application/routes/generate_route.dart';
+import 'package:todo/business_logic/bloc/todo_bloc.dart';
 import 'package:todo/business_logic/sign_in_screen/sign_in_bloc.dart';
 import 'package:todo/business_logic/sign_up_screen/sign_up_screen_bloc.dart';
 import 'package:todo/business_logic/splash_screen/splash_screen_cubit.dart';
@@ -33,6 +34,9 @@ class TodoApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<SplashScreenCubit>(),
         ),
+        BlocProvider(
+          create: (context) => getIt<TodoBloc>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,7 +44,7 @@ class TodoApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: customprimarycolor,
           fontFamily: GoogleFonts.montserrat().fontFamily,
-          scaffoldBackgroundColor: const Color.fromARGB(255, 228, 228, 227),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 235, 235, 233),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'package:todo/business_logic/sign_in_screen/sign_in_bloc.dart';
 
 import '../../../utils/colors/colors.dart';
 import '../../widgets/export_common_widgets.dart';
+import '../../widgets/message_snackbar.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -73,9 +73,24 @@ class LoginScreen extends StatelessWidget {
                             BlocConsumer<SignInBloc, SignInState>(
                               listener: (context, state) {
                                 if (state.message != null) {
-                                  log(state.message!);
+                                  if (state.message ==
+                                      'Successfully logged in') {
+                                    messageSnackbar(
+                                        context: context,
+                                        message: state.message!,
+                                        isError: false);
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                      ScreenRoutes.home,
+                                      (route) => false,
+                                    );
+                                  } else {
+                                    messageSnackbar(
+                                        context: context,
+                                        message: state.message!,
+                                        isError: true);
+                                  }
                                 }
-                                // TODO: implement listener
                               },
                               builder: (context, state) {
                                 if (state.isLoading) {
@@ -130,3 +145,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+

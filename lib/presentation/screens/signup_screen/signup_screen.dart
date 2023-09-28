@@ -7,6 +7,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todo/application/routes/routes.dart';
 import 'package:todo/business_logic/sign_up_screen/sign_up_screen_bloc.dart';
+import 'package:todo/presentation/widgets/message_snackbar.dart';
 
 import '../../../utils/colors/colors.dart';
 import '../../widgets/export_common_widgets.dart';
@@ -79,6 +80,30 @@ class SignUpScreen extends StatelessWidget {
                               listener: (context, state) {
                                 log(state.hasError.toString());
                                 log("${state.signUpRespModel?.message}");
+                                if (state.hasError) {
+                                  messageSnackbar(
+                                      context: context,
+                                      message: "Error while signup");
+                                } else {
+                                  if (state.signUpRespModel?.message ==
+                                      'Account created successfully') {
+                                    messageSnackbar(
+                                        context: context,
+                                        message:
+                                            state.signUpRespModel!.message!,
+                                        isError: false);
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            ScreenRoutes.login,
+                                            (route) => false);
+                                  } else {
+                                    messageSnackbar(
+                                      context: context,
+                                      message:
+                                          state.signUpRespModel?.message ?? '',
+                                    );
+                                  }
+                                }
                               },
                               builder: (context, state) {
                                 if (state.isLoading) {
