@@ -1,12 +1,12 @@
 # To-Do app
 
-A Flutter project
+A Flutter+Node.js Project
 
-## Getting Started
+## About this project
 
-This project is a full-stack project developed with FLutter for the front end and Node js for the back end
-MongoDB mongoose is used for storing data and JWT is used for authorization
-Flutter app is state-managed with Bloc and follows bloc architecture
+- This project is a full-stack project developed with Flutter for the front end and Node js for the back end
+- MongoDB mongoose is used for storing data and JWT is used for authorization
+- Flutter app is state-managed with Bloc and follows bloc architecture
 ------------------------------------------------------------
 - [Click here to view back-end code](https://github.com/Vineeth-Kolichal/todo-api)
   --------------------------------------------------------
