@@ -24,10 +24,12 @@ class LoginScreen extends StatelessWidget {
             height: size.width * 1.2,
             width: size.width,
             decoration: const BoxDecoration(
-                color: Color(0xFF42D1B2),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30))),
+              color: Color(0xFF42D1B2),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(30),
+              ),
+            ),
           ),
           Center(
             child: Padding(
@@ -59,12 +61,12 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             Space.y(10),
-                            CustomTextFormField(
+                            CustomTextFormField(keyboardType: TextInputType.emailAddress,
                               hintText: 'e-mail',
                               controller: signin.emailController,
                               prefixIcon: Iconsax.sms,
                             ),
-                            CustomTextFormField(
+                            CustomTextFormField(keyboardType: TextInputType.text,
                               hintText: 'Password',
                               controller: signin.passwordController,
                               prefixIcon: Iconsax.lock,
@@ -85,9 +87,10 @@ class LoginScreen extends StatelessWidget {
                                     );
                                   } else {
                                     messageSnackbar(
-                                        context: context,
-                                        message: state.message!,
-                                        isError: true);
+                                      context: context,
+                                      message: state.message!,
+                                      isError: true,
+                                    );
                                   }
                                 }
                               },

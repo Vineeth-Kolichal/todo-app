@@ -18,10 +18,10 @@ class TodoLitsTile extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final DateTime createdDate = todo.createdAt!;
     final String createdDateFormatted =
-        DateFormat.yMMMMd('en_US').add_jm().format(createdDate);
+        DateFormat("d MMM yyyy").format(createdDate);
     final DateTime updatedDate = todo.updatedAt!;
     final String updatedDateFormatted =
-        DateFormat.yMMMMd('en_US').add_jm().format(updatedDate);
+        DateFormat("d MMM yyyy").format(updatedDate);
     return Container(
       width: size.width,
       decoration: BoxDecoration(
@@ -66,16 +66,16 @@ class TodoLitsTile extends StatelessWidget {
             Space.y(10),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Iconsax.calendar_1,
                   size: 13,
                   color: Colors.grey,
                 ),
                 Text(
-                  'Created On : ',
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                  !todo.isCompleted! ? 'Created On : ' : "Completed On : ",
+                  style: const TextStyle(color: Colors.grey, fontSize: 13),
                 ),
-                Text(todo.isCompleted!
+                Text(!todo.isCompleted!
                     ? createdDateFormatted
                     : updatedDateFormatted)
               ],

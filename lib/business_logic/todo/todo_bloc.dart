@@ -20,11 +20,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc(this.todoRepository) : super(TodoState.initial()) {
     on<TodoEvent>((event, emit) async {
       emit(state.copyWith(
-        isLoading: true,
         hasError: false,
-        completed: [],
         errorMsg: null,
-        todoList: [],
         addStatus: null,
         deleteStatus: null,
         updataStatus: null,

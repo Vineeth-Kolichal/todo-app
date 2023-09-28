@@ -6,12 +6,13 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.prefixIcon,
     required this.controller,
-    this.maxlines,
+    this.maxlines, required this.keyboardType,
   });
   final String hintText;
   final IconData? prefixIcon;
   final TextEditingController controller;
   final int? maxlines;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
         color: const Color.fromARGB(255, 233, 250, 246),
         child: Material(
           child: TextFormField(
+            keyboardType:keyboardType ,
             maxLines: maxlines,
             validator: (value) {
               if (value == null || value.isEmpty) {

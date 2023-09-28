@@ -14,7 +14,7 @@ class TodoState with _$TodoState {
     required String? updataStatus,
   }) = _Initial;
   factory TodoState.initial() => const TodoState(
-        isLoading: false,
+        isLoading: true,
         hasError: false,
         completed: [],
         todoList: [],

@@ -61,17 +61,17 @@ class SignUpScreen extends StatelessWidget {
                               ),
                             ),
                             Space.y(10),
-                            CustomTextFormField(
+                            CustomTextFormField(keyboardType: TextInputType.name,
                               hintText: 'Name',
                               controller: signupBloc.nameController,
                               prefixIcon: Iconsax.user,
                             ),
-                            CustomTextFormField(
+                            CustomTextFormField(keyboardType: TextInputType.emailAddress,
                               hintText: 'e-mail',
                               controller: signupBloc.emailController,
                               prefixIcon: Iconsax.sms,
                             ),
-                            CustomTextFormField(
+                            CustomTextFormField(keyboardType: TextInputType.text,
                               hintText: 'Password',
                               controller: signupBloc.passwordController,
                               prefixIcon: Iconsax.lock,

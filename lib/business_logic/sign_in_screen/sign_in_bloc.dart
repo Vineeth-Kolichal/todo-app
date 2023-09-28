@@ -21,6 +21,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final result = await repository.signIn(SignInReqModel(
           email: emailController.text.trim(),
           password: passwordController.text.trim()));
+      emailController.clear();
+      passwordController.clear();
       emit(state.copyWith(isLoading: false, message: result));
     });
   }
